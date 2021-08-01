@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ItemOperations> mExampleList;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+
+    // need to create object of the class to access the custom methods of this class.
+    private ItemOperationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -59,7 +61,12 @@ public class MainActivity extends AppCompatActivity {
         mExampleList.remove(position);
         mAdapter.notifyItemRemoved(position);
     }
-
+    /*created separate method for changing item text */
+    public void changeItem(int position, String text) {
+        mExampleList.get(position).changeText1(text);
+        //notifying adapter about item change
+        mAdapter.notifyItemChanged(position);
+    }
     public void buildRecyclerView() {
         //        /*calling main recycler view*/
         mRecyclerView = findViewById(R.id.mainRecyclerView);
@@ -73,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         /*setting adapter to recycler view*/
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new ItemOperationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position,"TEXT CHANGED AT "+position);
+            }
+        });
+
+
     }
     public void createExampleList() {
         mExampleList = new ArrayList<>();
@@ -91,4 +107,5 @@ public class MainActivity extends AppCompatActivity {
         mExampleList.add(new ItemOperations(R.drawable.ic_baseline_apartment, "Appartment", "Location available"));
 
     }
+
 }
