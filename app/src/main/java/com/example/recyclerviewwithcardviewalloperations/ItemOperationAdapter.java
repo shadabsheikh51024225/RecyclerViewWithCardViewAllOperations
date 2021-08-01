@@ -18,6 +18,7 @@ public class ItemOperationAdapter extends RecyclerView.Adapter<ItemOperationAdap
     private OnItemClickListener mListener;
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onDeleteClick(int position);
     }
     /*creating on item click listner to respond and gonna use it in main class*/
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -27,11 +28,14 @@ public class ItemOperationAdapter extends RecyclerView.Adapter<ItemOperationAdap
         public ImageView mImageView;
         public TextView mTextView1;
         public TextView mTextView2;
+        //reference to delete button.
+        public ImageView mDeleteImage;
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
             mTextView1 = itemView.findViewById(R.id.textView);
             mTextView2 = itemView.findViewById(R.id.textView2);
+            mDeleteImage = itemView.findViewById(R.id.image_delete);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -40,6 +44,18 @@ public class ItemOperationAdapter extends RecyclerView.Adapter<ItemOperationAdap
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
                         }
+                    }
+                }
+            });
+            mDeleteImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
+                        }
+
                     }
                 }
             });

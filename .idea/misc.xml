@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_forever.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/card_view.xml" value="0.15729166666666666" />
       </map>
     </option>
   </component>
